@@ -10,7 +10,13 @@ static SDL_Renderer *r,*display;
 static SDL_Surface *canvas;
 static SDL_Texture *frame,*background;
 static TTF_Font *fonts[7];
+#ifdef SAP_PREVIEW_EN
+static const int sizes[]={18,23,26,35,60,15,31};
+#define UI_TEXT(en,zh) en
+#else
 static const int sizes[]={18,23,30,40,82,15,31};
+#define UI_TEXT(en,zh) zh
+#endif
 #define WHITE 0xeff1edff
 #define MUTED 0x94999bff
 #define LIME 0xc4f53fff
@@ -111,9 +117,14 @@ void ui_draw(uint64_t b,int lx,int ly,int rx,int ry,int transport,int battery,bo
  char bat[24];if(battery>=0)snprintf(bat,sizeof(bat),"%d%%",battery);else snprintf(bat,sizeof(bat),"--%%");
  text(1187,26,1,WHITE,bat,false);
  if(powered){Sint16 bx[]={1250,1244,1249,1246,1255,1250};Sint16 by[]={32,44,44,54,41,41};filledPolygonRGBA(r,bx,by,6,196,245,63,255);}
- text(132,180,4,WHITE,transport?"已连接":"待连接",false);circle(439,249,15,transport?LIME:MUTED,true);
- text(135,309,3,WHITE,transport==2?"USB 有线连接":transport==1?"Wi-Fi 无线连接":"等待电脑接入",false);
- text(136,379,2,MUTED,transport?"电脑端已就绪":"请运行电脑接收程序",false);
+ text(132,180,4,WHITE,transport?UI_TEXT("Connected","已连接"):UI_TEXT("Not connected","待连接"),false);
+#ifdef SAP_PREVIEW_EN
+ circle(602,228,10,transport?LIME:MUTED,true);
+#else
+ circle(439,249,15,transport?LIME:MUTED,true);
+#endif
+ text(135,309,3,WHITE,transport==2?UI_TEXT("USB connection","USB 有线连接"):transport==1?UI_TEXT("Wi-Fi connection","Wi-Fi 无线连接"):UI_TEXT("Waiting for PC","等待电脑接入"),false);
+ text(136,379,2,MUTED,transport?UI_TEXT("PC receiver ready","电脑端已就绪"):UI_TEXT("Start the PC receiver","请运行电脑接收程序"),false);
  // Segmented status: left USB and right Wi-Fi, both have the same dimensions.
  roundbox(134,465,430,69,26,0x252b2dff,true);
  if(transport){int x=transport==2?135:350;roundbox(x,466,213,67,25,LIME,true);box(transport==2?320:350,466,29,67,LIME);}
@@ -133,8 +144,8 @@ void ui_draw(uint64_t b,int lx,int ly,int rx,int ry,int transport,int battery,bo
  if(held(b,15))roundbox(751,478,25,32,4,LIME,true);
  if(held(b,12))roundbox(718,451,32,27,4,LIME,true);
  if(held(b,14))roundbox(777,451,32,27,4,LIME,true);
- text(54,658,0,MUTED,"双通道 · 自动切换",false);
- text(1024,658,0,MUTED,"+  −  长按 2 秒退出",false);
+ text(54,658,0,MUTED,UI_TEXT("USB + Wi-Fi · Auto switch","双通道 · 自动切换"),false);
+ text(1024,658,0,MUTED,UI_TEXT("+  −  Hold 2s to exit","+  −  长按 2 秒退出"),false);
  if(progress>0)box(54,639,(int)(1172*progress),3,LIME);
  SDL_RenderPresent(r);
  SDL_UpdateTexture(frame,NULL,canvas->pixels,canvas->pitch);
