@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<rect width="1280" height="720" fill="#171b1c"/>
+<g fill="none" stroke="#404647" stroke-width="1.3">
+<path d="M54 85H1226 M54 640H1226"/>
+</g>
+<!-- Logo -->
+<g stroke="#eff1ed" fill="none" stroke-width="2.5">
+<path d="M67 28H72V65H65Q55 65 55 55V38Q55 28 67 28Z"/>
+<path d="M79 28H84Q94 28 94 38V55Q94 65 84 65H79Z"/>
+</g>
+<circle cx="64" cy="39" r="3.5" fill="#eff1ed"/>
+<circle cx="85" cy="54" r="3.5" fill="#c4f53f"/>
+<!-- Slim mirrored controller outlines -->
+<g fill="none" stroke="#989d9f" stroke-width="2.5" stroke-linejoin="round">
+<path d="M741 183H818Q854 183 854 219V570Q854 607 817 607H749C707 607 674 576 674 535V253C674 214 705 183 741 183Z"/>
+<path d="M975 183H1047C1086 183 1119 215 1119 254V535C1119 576 1087 607 1047 607H976Q939 607 939 570V220Q939 183 975 183Z"/>
+<!-- D-pad, 100 x 100 -->
+<path d="M755 414H773Q780 414 780 421V447H805Q813 447 813 455V474Q813 482 805 482H780V507Q780 514 773 514H754Q747 514 747 507V482H722Q714 482 714 474V455Q714 447 722 447H747V421Q747 414 755 414Z"/>
+</g>
+</svg>

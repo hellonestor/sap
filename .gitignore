@@ -1,0 +1,12 @@
+/build/
+*.elf
+*.nro
+*.nacp
+*.map
+*.o
+*.d
+__pycache__/
+.venv/
+pc.txt
+/preview
+/preview.bmp
